@@ -1,7 +1,4 @@
 export function bresenhamLine(x0, y0, x1, y1, setPixel) {
-    // TODO: Implement Bresenham Line Algorithm
-}
-export function bresenhamLine(x0, y0, x1, y1, setPixel) {
     let dx = Math.abs(x1 - x0);
     let dy = Math.abs(y1 - y0);
 
