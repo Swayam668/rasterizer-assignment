@@ -1,18 +1,29 @@
-export function ddaLine(x0, y0, x1, y1, setPixel) {
-    let dx = x1 - x0;
-    let dy = y1 - y0;
+export function midpointCircle(xc, yc, r, setPixel) {
+    let x = 0;
+    let y = r;
+    let d = 1 - r;
 
-    let steps = Math.max(Math.abs(dx), Math.abs(dy));
+    function plotCirclePoints(x, y) {
+        setPixel(xc + x, yc + y);
+        setPixel(xc - x, yc + y);
+        setPixel(xc + x, yc - y);
+        setPixel(xc - x, yc - y);
+        setPixel(xc + y, yc + x);
+        setPixel(xc - y, yc + x);
+        setPixel(xc + y, yc - x);
+        setPixel(xc - y, yc - x);
+    }
 
-    let xInc = dx / steps;
-    let yInc = dy / steps;
+    plotCirclePoints(x, y);
 
-    let x = x0;
-    let y = y0;
-
-    for (let i = 0; i <= steps; i++) {
-        setPixel(Math.round(x), Math.round(y));
-        x += xInc;
-        y += yInc;
+    while (x < y) {
+        x++;
+        if (d < 0) {
+            d += 2 * x + 1;
+        } else {
+            y--;
+            d += 2 * (x - y) + 1;
+        }
+        plotCirclePoints(x, y);
     }
 }
